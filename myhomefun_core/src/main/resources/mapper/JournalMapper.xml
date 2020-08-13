@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rpy.qw.biz.mapper.JournalMapper">
+  <resultMap id="BaseResultMap" type="com.rpy.qw.biz.domain.Journal">
+    <!--@mbg.generated-->
+    <!--@Table biz_journal-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="good_id" jdbcType="INTEGER" property="goodId" />
+    <result column="pay_money" jdbcType="DOUBLE" property="payMoney" />
+    <result column="account_money" jdbcType="DOUBLE" property="accountMoney" />
+    <result column="account_points" jdbcType="DOUBLE" property="accountPoints" />
+    <result column="payment_money_type" jdbcType="INTEGER" property="paymentMoneyType" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, user_id, username, good_id, pay_money, account_money, account_points, payment_money_type, 
+    `type`, remark, deleted, created_time
+  </sql>
+</mapper>

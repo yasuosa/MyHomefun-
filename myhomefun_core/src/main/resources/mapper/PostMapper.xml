@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rpy.qw.post.mapper.PostMapper">
+  <resultMap id="BaseResultMap" type="com.rpy.qw.post.domain.Post">
+    <!--@mbg.generated-->
+    <!--@Table post_post-->
+    <id column="post_id" jdbcType="VARCHAR" property="postId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="post_title" jdbcType="VARCHAR" property="postTitle" />
+    <result column="post_category_id" jdbcType="INTEGER" property="postCategoryId" />
+    <result column="post_type_id" jdbcType="INTEGER" property="postTypeId" />
+    <result column="post_cover" jdbcType="VARCHAR" property="postCover" />
+    <result column="post_content" jdbcType="LONGVARCHAR" property="postContent" />
+    <result column="post_goods" jdbcType="INTEGER" property="postGoods" />
+    <result column="post_read" jdbcType="INTEGER" property="postRead" />
+    <result column="post_collection" jdbcType="INTEGER" property="postCollection" />
+    <result column="post_remark" jdbcType="VARCHAR" property="postRemark" />
+    <result column="post_commentNum" jdbcType="INTEGER" property="postCommentnum" />
+    <result column="post_from_source" jdbcType="LONGVARCHAR" property="postFromSource" />
+    <result column="ordernum" jdbcType="INTEGER" property="ordernum" />
+    <result column="allow" jdbcType="INTEGER" property="allow" />
+    <result column="post_hide_content_permission" jdbcType="VARCHAR" property="postHideContentPermission" />
+    <result column="is_has_hide_content" jdbcType="INTEGER" property="isHasHideContent" />
+    <result column="is_perfect" jdbcType="INTEGER" property="isPerfect" />
+    <result column="is_top" jdbcType="INTEGER" property="isTop" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="is_public" jdbcType="INTEGER" property="isPublic" />
+    <result column="allow_comment" jdbcType="INTEGER" property="allowComment" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+
+  <resultMap id="SimplePostMap" type="com.rpy.qw.post.vo.SimplePostVo">
+       <id property="postId" column="post_id" jdbcType="VARCHAR"/>
+       <result property="userId" column="user_id" jdbcType="INTEGER"/>
+       <result property="username" column="username" jdbcType="VARCHAR"/>
+       <result property="postTitle" column="post_title" jdbcType="VARCHAR"/>
+       <result property="readNum" column="post_read" jdbcType="INTEGER"/>
+       <result property="commentNum" column="post_commentNum" jdbcType="INTEGER"/>
+       <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    post_id, user_id, username, post_title, post_category_id, post_type_id, post_cover, 
+    post_content, post_goods, post_read, post_collection, post_remark, post_commentNum, 
+    post_from_source, ordernum, `allow`, post_hide_content_permission, is_has_hide_content, 
+    is_perfect, is_top, version, deleted, created_time, updated_time,allow_comment,isPublic
+  </sql>
+
+  <insert id="insertPostHideContent" parameterType="com.rpy.qw.post.domain.PostHideContent">
+   insert into post_hide_content(type,post_id,resource,price)
+   values (#{type},#{postId},#{resource},#{price})
+  </insert>
+
+  <select id="selectPostHideContentBy" resultType="com.rpy.qw.post.domain.PostHideContent">
+    select * from post_hide_content
+    where  post_id=#{postId,jdbcType=VARCHAR}
+  </select>
+
+
+  <update id="deleteHideContentByPostId">
+    update post_hide_content
+    set deleted = 1
+    where  post_id = #{postId,jdbcType=VARCHAR}
+
+  </update>
+
+  <update id="deleteTagNamsByPost">
+   update post_post_tag
+   set deleted = 1
+   where  post_id =#{postId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectTagNamsByPostId" resultType="java.lang.String">
+   select name from post_post_tag p1 join post_tag p2 on  p1.tag_id =p2.id
+    where  p1.post_id = #{postId,jdbcType=VARCHAR}
+    </select>
+
+    <update id="updateHideContentByPost">
+    update post_hide_content
+    set type =#{type,jdbcType=INTEGER} ,post_id =#{postId,jdbcType=VARCHAR},
+    resource =#{resource,jdbcType=VARCHAR},price =#{price,jdbcType=DOUBLE}
+    where  id = #{id}
+    </update>
+
+    <select id="selectVersionByPost" resultType="java.lang.Integer">
+     select version from post_post
+     where  post_id =#{postId,jdbcType=VARCHAR}
+     and deleted = 0
+    </select>
+
+    <select id="getListPage" resultMap="BaseResultMap">
+     select  post_post.post_id,user_id,username,post_title,post_category_id,post_type_id,post_remark,
+     post_cover,post_goods,post_read,post_collection,post_commentNum,is_perfect,
+     is_top,post_post.created_time
+     from post_post left join post_post_tag on (post_post.post_id = post_post_tag.post_id and post_post_tag.deleted=0)
+    where  post_post.deleted =0  and is_public = 1
+    <if test="page.params.categoryId !=null ">
+        and post_category_id = #{page.params.categoryId}
+    </if>
+    <if test="page.params.userId !=null ">
+        and post_category_id = #{page.params.userId}
+    </if>
+     <if test="page.params.tagId !=null ">
+        and tag_id = #{page.params.tagId }
+    </if>
+    <if test="page.params.typeId !=null  ">
+        and post_type_id= #{page.params.typeId}
+    </if>
+    <if test="page.params.isPerfect !=null  ">
+        and is_perfect= #{page.params.isPerfect}
+    </if>
+     <if test="page.params.postContent!=null and page.params.postContent !=''  ">
+        and post_content like CONCAT('%',#{page.params.postContent},'%')
+    </if>
+    <if test="page.params.postTitle !=null  and page.params.postTitle !=''">
+        and post_title like CONCAT('%',#{page.params.postTitle},'%')
+    </if>
+    group by post_post.post_id
+
+    order by is_top desc
+    <choose>
+     <when test="page.sortColumn != null and page.sortColumn != ''">
+        ,${page.sortColumn} ${page.sortMethod}
+     </when>
+
+     <otherwise >
+        ,created_time desc
+     </otherwise>
+
+    </choose>
+
+    limit ${(page.currentPage-1)*page.pageSize } , #{page.pageSize }
+    </select>
+
+    <select id="selectTotalByListPage" resultType="long">
+    select  count( distinct  post_post.post_id)
+     from post_post left join post_post_tag on(post_post.post_id = post_post_tag.post_id and post_post_tag.deleted=0)
+    where  post_post.deleted =0  and is_public = 1
+    <if test="page.params.categoryId !=null ">
+        and post_category_id = #{page.params.categoryId}
+    </if>
+     <if test="page.params.tagId !=null ">
+        and tag_id = #{page.params.tagId }
+    </if>
+    <if test="page.params.typeId !=null  ">
+        and post_type_id= #{page.params.typeId}
+    </if>
+    <if test="page.params.isPerfect !=null  ">
+        and is_perfect= #{page.params.isPerfect}
+    </if>
+     <if test="page.params.postContent!=null and page.params.postContent !=''  ">
+        and post_content like CONCAT('%',#{page.params.postContent},'%')
+    </if>
+    <if test="page.params.postTitle !=null  and page.params.postTitle !=''">
+        and post_title like CONCAT('%',#{page.params.postTitle},'%')
+    </if>
+
+
+    </select>
+
+    <select id="selectPostIdAndPostTitleOrderByReadAndCategortId" resultMap="BaseResultMap">
+    select post_id,post_title,post_read
+    from post_post
+    where post_category_id = #{categoryId} and is_public = 1 and deleted =0
+    limit 0,8
+    </select>
+
+
+
+    <update id="updateCommentNumByPostId">
+    update post_post set post_commentNum = post_commentNum + #{nb}
+    where post_id = #{pid}
+
+    </update>
+
+    <select id="selectCountUserAndPost" resultType="int">
+    select count(*) from post_user_deed_post
+    where post_id=#{postId,jdbcType=VARCHAR} and user_id =#{userId} and type=#{type}
+    </select>
+
+
+    <insert id="insertUserAndPost">
+    insert into post_user_deed_post(post_id,user_id,type)
+    values (#{postId,jdbcType=VARCHAR},#{userId},#{type})
+    </insert>
+
+    <delete id="deleteUserAndPost">
+    delete from post_user_deed_post
+    where post_id=#{postId,jdbcType=VARCHAR} and user_id =#{userId} and type=#{type}
+    </delete>
+
+
+
+    <update id="updateGoodsByPostId">
+    update post_post set post_goods =post_goods + #{value} , version = version +1
+    where post_id = #{postId,jdbcType=VARCHAR} and version = #{version}
+    </update>
+
+    <update id="updateCollectNumByPostId">
+     update post_post set post_collection =post_collection + #{value} , version = version +1
+    where post_id = #{postId,jdbcType=VARCHAR} and version = #{version}
+    </update>
+
+
+    <select id="selectPostHideContentPermission" resultType="java.lang.String">
+    select post_hide_content_permission from post_post
+    where post_id = #{postId,jdbcType=VARCHAR} and  is_has_hide_content = 1
+    </select>
+
+    <select id="selectHideCostByPostId" resultType="java.lang.Double">
+        select price from post_hide_content
+        where post_id = #{postId,jdbcType=VARCHAR} and deleted = 0
+        and type = 1
+    </select>
+
+    <select id="selectPostIdByTagId" resultType="java.lang.String">
+       select  post_id
+     from post_post_tag
+    where  deleted =0
+    <if test="page.params.tagId !=null ">
+        and tag_id = #{page.params.tagId}
+    </if>
+    order by created_time desc
+
+    limit ${(page.currentPage-1)*page.pageSize } , #{page.pageSize }
+    </select>
+
+    <select id="selectCountPostIdByTagId" resultType="long">
+        select  post_id
+     from post_post_tag
+    where  deleted =0
+    <if test="page.params.tagId !=null ">
+        and tag_id = #{page.params.tagId}
+    </if>
+    order by created_time desc
+
+    </select>
+
+    <select id="selectPostInPostIds" resultMap="BaseResultMap">
+     select  post_id,user_id,username,post_title,post_category_id,post_type_id,post_remark,
+     post_cover,post_goods,post_read,post_collection,post_commentNum,is_perfect,
+     is_top,created_time
+     from post_post
+    where  deleted =0
+    and post_id in
+    <foreach collection="pids" item="id" index="index" open="(" close=")" separator=",">
+	  #{id}
+	</foreach>
+    </select>
+
+    <select id="selectAllowCommentByPostId" resultType="int">
+        select allow_comment from post_post
+        where deleted=0 and is_public= 1 and post_id = #{postId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectSimplePostByParams" resultMap="SimplePostMap">
+        select post_id,user_id,username,post_title,post_read,post_commentNum,created_time
+        from post_post
+        where  deleted = #{deleted} and user_id = #{userId,jdbcType=INTEGER} and is_public = #{isPublish}
+
+    </select>
+
+
+    <select id="selectPostTitleByPostId" resultType="java.lang.String">
+     select post_title from post_post
+     where post_id =#{postId,jdbcType=VARCHAR}
+    </select>
+
+
+
+
+    <select id="selectPostIdsUserDeepPostByPage" resultType="java.lang.String">
+    select post_id
+    from post_user_deed_post
+    where user_id =#{page.params.userId} and type =#{page.params.deedType}
+    order by created_time
+    limit ${(page.currentPage-1)*page.pageSize } , #{page.pageSize }
+    </select>
+
+    <select id="selectTotalsUserDeepPostByPage" resultType="long">
+    select count(post_id)
+    from post_user_deed_post
+    where user_id =#{page.params.userId} and type =#{page.params.deedType}
+    order by created_time
+    </select>
+
+    <delete id="deleteTrueHideContentByPostId">
+    delete  from post_hide_content
+    where  post_id = #{postId,jdbcType=VARCHAR}
+    </delete>
+
+
+    <delete id="deleteTrueTagNamsByPost">
+    delete  from post_post_tag
+    where  post_id = #{postId,jdbcType=VARCHAR}
+    </delete>
+
+    <update id="recycleHideContentByPostId">
+     update post_hide_content
+        set deleted = 0
+        where  post_id = #{postId,jdbcType=VARCHAR}
+
+    </update>
+
+    <update id="recycleTagNamsByPost">
+       update post_post_tag
+       set deleted = 0
+       where  post_id =#{postId,jdbcType=VARCHAR}
+   </update>
+
+   <select id="selectSimplePostByParamsOfPage" resultMap="SimplePostMap">
+    select post_id,user_id,username,post_title,post_read,post_commentNum,created_time
+    from post_post
+    where  deleted = 1 and  user_id = #{page.params.userId,jdbcType=INTEGER}
+    order by created_time
+    limit ${(page.currentPage-1)*page.pageSize } , #{page.pageSize }
+   </select>
+   <select id="selectCountSimplePostByParamsOfPage" resultType="long">
+   select count(post_id)
+    from post_post
+    where  deleted = 1 and user_id = #{page.params.userId,jdbcType=INTEGER}
+    order by created_time
+   </select>
+
+   <delete id="deleteTruePostUserDeed">
+    delete from post_user_deed_post
+    where  post_id = #{postId,jdbcType=VARCHAR}
+
+    </delete>
+
+
+
+
+
+</mapper>

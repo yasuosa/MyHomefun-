@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rpy.qw.post.mapper.TypeMapper">
+  <resultMap id="BaseResultMap" type="com.rpy.qw.post.domain.Type">
+    <!--@mbg.generated-->
+    <!--@Table post_type-->
+    <id column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+    <result column="type_post_count" jdbcType="INTEGER" property="typePostCount" />
+    <result column="enable" jdbcType="INTEGER" property="enable" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    type_id, type_name, type_post_count, `enable`, created_time
+  </sql>
+</mapper>

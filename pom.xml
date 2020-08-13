@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>pom</packaging>
+	<modules>
+		<module>myhomefun_admin</module>
+		<module>myhomefun_front</module>
+		<module>myhomefun_core</module>
+		<module>myhomefun_common</module>
+		<module>myhomefun_file</module>
+	</modules>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.2.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.rpy</groupId>
+	<artifactId>myhomefun</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>myhomefun</name>
+	<description>我的趣屋项目</description>
+	<properties>
+		<java-jwt.version>3.2.0</java-jwt.version>
+		<slf4j-api.version>1.7.16</slf4j-api.version>
+		<mybatis-plus-boot-starter.version>3.3.1</mybatis-plus-boot-starter.version>
+		<druid-spring-boot-starter.version>1.1.21</druid-spring-boot-starter.version>
+		<hutool-all.version>5.1.0</hutool-all.version>
+		<fastjson.version>1.2.62</fastjson.version>
+		<commons-lang3.version>3.9</commons-lang3.version>
+		<shiro-spring.version>1.4.1</shiro-spring.version>
+		<fastdfs-client.version>1.26.7</fastdfs-client.version>
+		<jaxb-api.version>2.3.0</jaxb-api.version>
+		<knife4j-spring-boot-starter.version>2.0.2</knife4j-spring-boot-starter.version>
+		<poi.version>4.0.1</poi.version>
+		<spring-boot-starter-data-redis.version>1.5.21.RELEASE</spring-boot-starter-data-redis.version>
+		<spring-boot-starter-jdbc.version>1.5.21.RELEASE</spring-boot-starter-jdbc.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.auth0</groupId>
+				<artifactId>java-jwt</artifactId>
+				<version>${java-jwt.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j-api.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-redis</artifactId>
+				<version>${spring-boot-starter-data-redis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-jdbc</artifactId>
+				<version>${spring-boot-starter-jdbc.version}</version>
+			</dependency>
+
+
+			<!--mybatis-plus-->
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-boot-starter</artifactId>
+				<version>${mybatis-plus-boot-starter.version}</version>
+			</dependency>
+
+			<!--druid-->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid-spring-boot-starter</artifactId>
+				<version>${druid-spring-boot-starter.version}</version>
+			</dependency>
+			<!--相关工具类-->
+			<dependency>
+				<groupId>cn.hutool</groupId>
+				<artifactId>hutool-all</artifactId>
+				<version>${hutool-all.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${fastjson.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons-lang3.version}</version>
+			</dependency>
+
+			<!-- 引入shiro -->
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-spring</artifactId>
+				<version>${shiro-spring.version}</version>
+			</dependency>
+
+
+			<!--redis-->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-redis</artifactId>
+			</dependency>
+			<!--fastdfs-->
+			<dependency>
+				<groupId>com.github.tobato</groupId>
+				<artifactId>fastdfs-client</artifactId>
+				<version>${fastdfs-client.version}</version>
+			</dependency>
+
+			<!--解决swaggerapi依赖问题-->
+			<dependency>
+				<groupId>javax.xml.bind</groupId>
+				<artifactId>jaxb-api</artifactId>
+				<version>${jaxb-api.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.github.xiaoymin</groupId>
+				<artifactId>knife4j-spring-boot-starter</artifactId>
+				<!--在引用时请在maven中央仓库搜索最新版本号-->
+				<version>${knife4j-spring-boot-starter.version}</version>
+			</dependency>
+
+
+			<!--poi-->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>${poi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml</artifactId>
+				<version>${poi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml-schemas</artifactId>
+				<version>${poi.version}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+
+
+
+</project>

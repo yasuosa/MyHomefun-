@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rpy.qw.post.mapper.AuditingMapper">
+  <resultMap id="BaseResultMap" type="com.rpy.qw.post.domain.Auditing">
+    <!--@mbg.generated-->
+    <!--@Table post_auditing-->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="post_id" jdbcType="VARCHAR" property="postId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="feedback_content" jdbcType="VARCHAR" property="feedbackContent" />
+    <result column="operate_by" jdbcType="VARCHAR" property="operateBy" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+
+  <resultMap id="BaseResultMap2" type="com.rpy.qw.post.vo.AuditingVo">
+    <!--@mbg.generated-->
+    <!--@Table post_auditing-->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="post_id" jdbcType="VARCHAR" property="postId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="feedback_content" jdbcType="VARCHAR" property="feedbackContent" />
+    <result column="operate_by" jdbcType="VARCHAR" property="operateBy" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="post_category_id" jdbcType="INTEGER" property="categoryId"/>
+    <result column="post_type_id"  jdbcType="INTEGER" property="typeId"/>
+    <result column="post_title" jdbcType="VARCHAR" property="postTitle"/>
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, post_id, `status`, user_id, username, operate_by, deleted, created_time, updated_time,feedback_content
+  </sql>
+
+  <select id="getByPage" resultMap="BaseResultMap2">
+    select id,p1.post_id,p1.user_id,p1.username,status,operate_by,p1.created_time,feedback_content,
+    post_category_id,post_type_id,post_title
+    from post_auditing p1 join post_post p2
+    on p1.post_id=p2.post_id
+    where  p1.deleted =0
+    <if test="page.params.id !=null and page.params.id !='' ">
+        and id = #{page.params.id}
+    </if>
+    <if test="page.params.postId !=null and page.params.postId !='' ">
+        and p1.post_id = #{page.params.postId}
+    </if>
+    <if test="page.params.categoryId !=null ">
+        and post_category_id = #{page.params.categoryId}
+    </if>
+    <if test="page.params.typeId !=null  ">
+        and post_type_id= #{page.params.typeId}
+    </if>
+     <if test="page.params.status!=null  ">
+        and status= #{page.params.status}
+    </if>
+    <if test="page.params.postTitle !=null  and page.params.postTitle !=''">
+        and post_title like  CONCAT('%',#{page.params.postTitle},'%' )
+    </if>
+    <if test="page.params.username !=null  and page.params.username !=''">
+        and p1.username like CONCAT('%',#{page.params.username},'%' )
+    </if>
+    <if test="page.params.operateBy !=null  and page.params.operateBy !=''">
+        and operate_by like  CONCAT('%',#{page.params.operateBy},'%' )
+    </if>
+
+    <if test="page.sortColumn != null and page.sortColumn != ''">
+        order by ${page.sortColumn} ${page.sortMethod}
+    </if>
+    limit ${(page.currentPage-1)*page.pageSize } , #{page.pageSize }
+  </select>
+
+  <select id="selectPostIdByAuditingId" resultType="java.lang.String">
+    select  post_id from post_auditing
+    where id =#{id}
+  </select>
+
+  <select id="selectTotalByPage" resultType="long">
+    select  count(*)
+    on p1.post_id=p2.post_id
+    where  p1.deleted =0
+    <if test="page.params.id !=null and page.params.id !='' ">
+        and id = #{page.params.id}
+    </if>
+    <if test="page.params.postId !=null and page.params.postId !='' ">
+        and p1.post_id = #{page.params.postId}
+    </if>
+    <if test="page.params.categoryId !=null ">
+        and post_category_id = #{page.params.categoryId}
+    </if>
+    <if test="page.params.typeId !=null  ">
+        and post_type_id= #{page.params.typeId}
+    </if>
+     <if test="page.params.status!=null  ">
+        and status= #{page.params.status}
+    </if>
+     <if test="page.params.postTitle !=null  and page.params.postTitle !=''">
+        and post_title like  CONCAT('%',#{page.params.postTitle},'%' )
+    </if>
+    <if test="page.params.username !=null  and page.params.username !=''">
+        and p1.username like CONCAT('%',#{page.params.username},'%' )
+    </if>
+    <if test="page.params.operateBy !=null  and page.params.operateBy !=''">
+        and operate_by like  CONCAT('%',#{page.params.operateBy},'%' )
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rpy.qw.sys.mapper.NoticeMapper">
+  <resultMap id="BaseResultMap" type="com.rpy.qw.sys.domain.Notice">
+    <!--@mbg.generated-->
+    <!--@Table sys_notice-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="cover" jdbcType="VARCHAR" property="cover" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="md_content" jdbcType="LONGVARCHAR" property="mdContent" />
+    <result column="task" jdbcType="VARCHAR" property="task" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="enable" jdbcType="INTEGER" property="enable" />
+    <result column="created_by_id" jdbcType="INTEGER" property="createdById" />
+    <result column="created_by_name" jdbcType="VARCHAR" property="createdByName" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, title, content, task, deleted, created_by_id, created_by_name, created_time,enable,cover,md_content
+  </sql>
+
+  <select id="getTwoHomeNotice" resultType="com.rpy.qw.sys.domain.Notice">
+    select  title,id,cover
+    from sys_notice
+    where deleted = 0 and enable =1
+    order by created_time desc
+    limit 0,2
+  </select>
+</mapper>

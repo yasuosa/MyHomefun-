@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rpy.qw.post.mapper.CategoryMapper">
+  <resultMap id="BaseResultMap" type="com.rpy.qw.post.domain.Category">
+    <!--@mbg.generated-->
+    <!--@Table post_category-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="enable" jdbcType="INTEGER" property="enable" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `name`, remark, `path`, `enable`, created_time, updated_time
+  </sql>
+</mapper>

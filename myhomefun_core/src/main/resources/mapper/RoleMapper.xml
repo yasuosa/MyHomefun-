@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rpy.qw.sys.mapper.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.rpy.qw.sys.domain.Role">
+    <!--@mbg.generated-->
+    <!--@Table sys_role-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="available" jdbcType="INTEGER" property="available" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `name`, remark, available, deleted, created_time, updated_time
+  </sql>
+
+  <select id="queryMenuIdsAndPermissionIdsByRoleId" resultType="java.lang.Integer">
+    select  mid from sys_role_menu
+    where  rid = #{id,jdbcType=INTEGER}
+  </select>
+
+
+  <delete id="deleteMenuAndPermisssionIdsByRole">
+   delete from sys_role_menu
+   where rid =#{rid}
+  </delete>
+
+  <insert id="insertMenuAndPermisssionIdsByRole" parameterType="com.rpy.qw.sys.vo.RoleAndMenu">
+    insert  into sys_role_menu(rid,mid)
+    values
+    <foreach collection="mids" item="item" index="index" separator=",">
+    				(
+    					#{rid,jdbcType=INTEGER},
+    					#{item}
+    				)
+    </foreach>
+  </insert>
+
+  <select id="queryRoleIdsByMid" resultType="java.lang.Integer">
+   select rid from sys_role_menu
+   where mid =#{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="queryRoleIdByUid" resultType="java.lang.Integer">
+    select r_id from sys_user_role
+    where u_id = #{userId}
+  </select>
+
+  <select id="queryMenuIdsByRoleIds" resultType="java.lang.Integer">
+        select distinct  mid from  sys_role_menu
+        <where>
+            <foreach collection="rids" open="rid in(" close=")" separator="," item="rid">
+                #{rid}
+            </foreach>
+        </where>
+    </select>
+</mapper>

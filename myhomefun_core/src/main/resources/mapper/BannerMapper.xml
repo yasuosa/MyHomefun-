@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rpy.qw.post.mapper.BannerMapper">
+  <resultMap id="BaseResultMap" type="com.rpy.qw.post.domain.Banner">
+    <!--@mbg.generated-->
+    <!--@Table post_banner-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="banner_title" jdbcType="VARCHAR" property="bannerTitle" />
+    <result column="banner_href" jdbcType="VARCHAR" property="bannerHref" />
+    <result column="banner_type" jdbcType="INTEGER" property="bannerType" />
+    <result column="banner_cover" jdbcType="VARCHAR" property="bannerCover" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+
+    <result column="banner_remark" jdbcType="VARCHAR" property="bannerRemark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, banner_title, banner_href, banner_type, created_time,  banner_remark,banner_cover
+  </sql>
+</mapper>

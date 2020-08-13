@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rpy.qw.biz.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.rpy.qw.biz.domain.Order">
+    <!--@mbg.generated-->
+    <!--@Table biz_order-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="post_id" jdbcType="VARCHAR" property="postId" />
+    <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="payment" jdbcType="VARCHAR" property="payment" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, post_id, goods_id, title, price, `number`, payment, address, `status`, created_time, user_id,username,
+    deleted
+  </sql>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rpy.qw.biz.mapper.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.rpy.qw.biz.domain.UserInfo">
+    <!--@mbg.generated-->
+    <!--@Table biz_user_info-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="zfb_account" jdbcType="VARCHAR" property="zfbAccount" />
+    <result column="money" jdbcType="DOUBLE" property="money" />
+    <result column="accumulate_points" jdbcType="DOUBLE" property="accumulatePoints" />
+    <result column="zfb_receiving_money_code" jdbcType="VARCHAR" property="zfbReceivingMoneyCode" />
+    <result column="wx_receiving_money_code" jdbcType="VARCHAR" property="wxReceivingMoneyCode" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, user_id, username, money, accumulate_points, zfb_receiving_money_code, wx_receiving_money_code, zfb_account,deleted
+    version, created_time
+  </sql>
+
+  <select id="selectVersionById" resultType="java.lang.Integer">
+    select version from biz_user_info
+    where id = #{id} and deleted = 0
+  </select>
+
+  <select id="selectUserInfoByUserName" resultMap="BaseResultMap">
+    select * from biz_user_info
+    where username = #{username} and deleted = 0
+  </select>
+
+  <select id="selectPointsByUserId" resultType="java.lang.Double">
+   select accumulate_points from biz_user_info
+   where  user_id = #{userId,jdbcType=INTEGER}
+  </select>
+</mapper>

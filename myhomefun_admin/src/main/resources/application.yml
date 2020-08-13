@@ -1,0 +1,10 @@
+#服务器端口
+server:
+  port: 4399
+  tomcat:
+    connection-timeout: 10000
+
+spring:
+  profiles:
+    include: core
+

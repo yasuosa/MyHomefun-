@@ -1,0 +1,51 @@
+
+spring:
+  profiles:
+    include: file
+  datasource:
+    password: xxxxxxx
+    username: xxxxxxxx
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/myhomefun?useUnicode=true&characterEncoding=utf8&useSSL=true
+    druid:
+      min-idle: 100
+      max-active: 500
+      max-idle: 100
+      initial-size: 1
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        login-password: admin
+        url-pattern: "/druid/*"
+        deny:
+        allow:
+      max-wait: 5000
+  redis:
+    port: 4366
+    host: xx.xxx.xx.xxx
+    jedis:
+      pool:
+        max-active: 1024
+        max-idle: 500
+        min-idle: 100
+    timeout: 10000
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+
+
+#mps
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+    banner: true
+  mapper-locations:
+    - classpath:mapper/**/*Mapper.xml
+
+
+

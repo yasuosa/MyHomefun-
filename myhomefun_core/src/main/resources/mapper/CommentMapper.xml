@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rpy.qw.post.mapper.CommentMapper">
+  <resultMap id="BaseResultMap" type="com.rpy.qw.post.domain.Comment">
+    <!--@mbg.generated-->
+    <!--@Table post_comment-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="post_id" jdbcType="VARCHAR" property="postId" />
+    <result column="userId" jdbcType="INTEGER" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="goods" jdbcType="INTEGER" property="goods" />
+    <result column="comment" jdbcType="LONGVARCHAR" property="comment" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, pid, post_id, userId, username, goods, `comment`, deleted, created_time, updated_time
+  </sql>
+
+
+   <select id="selectGoodComment" resultType="int">
+      select count(*) from post_user_good_comment
+      where comment_id = #{commentId} and user_id = #{userId}
+   </select>
+
+
+   <insert id="insertGoodComment">
+     insert  into post_user_good_comment(comment_id,user_id) values (#{commentId},#{userId})
+   </insert>
+
+   <delete id="deleteGoodComment">
+    delete  from post_user_good_comment
+    where comment_id = #{commentId} and user_id = #{userId}
+   </delete>
+
+   <select id="selectCommentByPostIdAndUserId" resultMap="BaseResultMap">
+    select * from post_comment
+    where userId = #{userId} and post_id = #{postId,jdbcType=VARCHAR}
+    and deleted = 0
+    limit 0,1
+
+    </select>
+
+    <delete id="deleteTrueCommentByPostId">
+    delete from post_comment
+    where  post_id=#{postId,jdbcType=VARCHAR}
+    </delete>
+</mapper>

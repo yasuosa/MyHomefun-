@@ -1,0 +1,9 @@
+server:
+  port: 4396
+
+spring:
+  profiles:
+    include: core
+
+
+

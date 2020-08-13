@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rpy.qw.post.mapper.TagMapper">
+  <resultMap id="BaseResultMap" type="com.rpy.qw.post.domain.Tag">
+    <!--@mbg.generated-->
+    <!--@Table post_tag-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="c_id" jdbcType="INTEGER" property="cId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, c_id,`name`, created_time
+  </sql>
+
+  <select id="selectByTagName" resultMap="BaseResultMap">
+    select * from post_tag
+    where c_id=#{cid} and name =#{name}
+  </select>
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+    insert  into post_tag(c_id,name)
+    values (#{cId},#{name,jdbcType=VARCHAR})
+
+  </insert>
+
+
+  <insert id="insertPostAndTag" >
+   insert into post_post_tag(post_id,tag_id)
+   values (#{postId,jdbcType=VARCHAR},#{tagId})
+</insert>
+
+
+<delete id="deletePostAndTag">
+    delete from post_post_tag
+    where post_id= #{postId,jdbcType=VARCHAR}
+</delete>
+
+<select id="selectConutByPostAndTag" resultType="java.lang.Integer">
+    select count(*) from
+    post_post_tag
+    where tag_id = #{id} and deleted = 0
+</select>
+
+<select id="selectTagByPostId" resultMap="BaseResultMap">
+    select post_tag.id, post_tag.c_id, post_tag.name,post_tag.created_time
+    from post_tag left  join  post_post_tag on  post_tag.id = tag_id
+    where post_id = #{postId,jdbcType=VARCHAR}
+</select>
+</mapper>

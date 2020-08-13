@@ -1,0 +1,16 @@
+fdfs:
+  so-timeout: 2500       # 读取时间
+  connect-timeout: 600   # 连接超时时间
+  thumb-image:           # 缩略图
+    width: 100
+    height: 100
+  tracker-list:          # tracker服务配置地址列表
+    - localhost:22122
+upload:
+  base-url: http://localhost:4388/
+  allow-types:
+    - image/jpeg
+    - image/png
+    - image/bmp
+    - image/gif
+

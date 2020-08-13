@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rpy.qw.sys.mapper.LogMapper">
+  <resultMap id="BaseResultMap" type="com.rpy.qw.sys.domain.Log">
+    <!--@mbg.generated-->
+    <!--@Table sys_log-->
+    <id column="log_id" jdbcType="INTEGER" property="logId" />
+    <result column="log_url" jdbcType="VARCHAR" property="logUrl" />
+    <result column="log_params" property="logParams" />
+    <result column="log_status" jdbcType="INTEGER" property="logStatus" />
+    <result column="log_message" property="logMessage" />
+    <result column="log_method" jdbcType="VARCHAR" property="logMethod" />
+    <result column="log_time" jdbcType="BIGINT" property="logTime" />
+    <result column="log_result"  property="logResult" />
+    <result column="log_ip" jdbcType="VARCHAR" property="logIp" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    log_id, log_url, log_params, log_status, log_message, log_method, log_time, log_result, 
+    log_ip, created_time, created_by
+  </sql>
+</mapper>

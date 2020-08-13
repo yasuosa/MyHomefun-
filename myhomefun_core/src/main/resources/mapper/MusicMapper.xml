@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rpy.qw.sys.mapper.MusicMapper">
+  <resultMap id="BaseResultMap" type="com.rpy.qw.sys.domain.Music">
+    <!--@mbg.generated-->
+    <!--@Table sys_music-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="artist" jdbcType="VARCHAR" property="artist" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="cover" jdbcType="VARCHAR" property="cover" />
+    <result column="lrc" jdbcType="LONGVARCHAR" property="lrc" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="enable" jdbcType="INTEGER" property="enable" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, deleted, `name`, artist, url, cover, lrc, created_time, `enable`
+  </sql>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rpy.qw.biz.mapper.SignMapper">
+  <resultMap id="BaseResultMap" type="com.rpy.qw.biz.domain.Sign">
+    <!--@mbg.generated-->
+    <!--@Table biz_sign-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="date_month" jdbcType="TIMESTAMP" property="dateMonth" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="mask" jdbcType="INTEGER" property="mask" />
+    <result column="continue_sign_month" jdbcType="INTEGER" property="continueSignMonth" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="before_continue_sign_month" jdbcType="INTEGER" property="beforeContinueSignMonth" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, user_id, date_month, mask, continue_sign_month, updated_time, before_continue_sign_month
+  </sql>
+</mapper>
