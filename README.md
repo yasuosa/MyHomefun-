@@ -54,7 +54,7 @@
 
 ![](./doc/FireShot Capture 026 - 我的趣屋 - www.myhomefun.cn.png)
 
-![FireShot Capture 029 - MyBatisCodeHelper-Pro插件破解版[2.8.2] - www.myhomefun.cn](E:\学习资源2\个人开发\myhomefun\myhomefun\README.assets\FireShot Capture 029 - MyBatisCodeHelper-Pro插件破解版[2.8.2] - www.myhomefun.cn.png)
+![](./doc/FireShot Capture 029 - MyBatisCodeHelper-Pro插件破解版[2.8.2] - www.myhomefun.cn.png)
 
 ![FireShot Capture 032 - 编程之家 - www.myhomefun.cn](E:\学习资源2\个人开发\myhomefun\myhomefun\README.assets\FireShot Capture 032 - 编程之家 - www.myhomefun.cn.png)
 
